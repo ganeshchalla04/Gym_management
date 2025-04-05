@@ -1,4 +1,43 @@
+# 💪 Gym Management Web Application
 
+A modern, responsive web app built using **HTML, CSS, JavaScript**, and **Firebase**, designed to simplify gym operations and replace paper receipts. This project is perfect for gym owners and members to manage bills, notifications, and profiles in a secure and user-friendly way.
+
+---
+
+## 🚀 Features
+
+### 🛠 Admin Panel
+- Secure login
+- Add/update/delete gym members
+- Generate digital payment receipts
+- Send announcements or fee notifications
+
+### 🙋 Member Panel
+- Secure login
+- View digital payment receipts
+- Receive important notifications from the gym
+
+---
+
+## 🔧 Tech Stack
+
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend & Auth:** Firebase Authentication
+- **Database:** Firebase Firestore
+
+---
+
+## 🗂 Folder Structure
+
+gym-app/ 
+│ 
+├── index.html # Redirect to login 
+├── login.html # Login page 
+├── admin.html # Admin dashboard 
+├── member.html # Member dashboard 
+├── styles.css # Global styles 
+├── firebase-config.js # Firebase configuration 
+└── assets/ # For images or icons (add as needed)
 ---
 
 ## ⚙️ Firebase Setup Instructions
