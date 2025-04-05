@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="dashboard">
+    <h1>Admin Dashboard</h1>
+    <section>
+      <h3>Add Member</h3>
+      <input id="memberName" placeholder="Member Name">
+      <input id="memberEmail" placeholder="Email">
+      <button onclick="addMember()">Add</button>
+    </section>
+    <section>
+      <h3>Create Bill</h3>
+      <input id="billEmail" placeholder="Member Email">
+      <input id="amount" placeholder="Amount">
+      <button onclick="createBill()">Create Bill</button>
+    </section>
+    <section>
+      <h3>Send Notification</h3>
+      <input id="noteEmail" placeholder="Member Email">
+      <input id="message" placeholder="Message">
+      <button onclick="sendNotification()">Send</button>
+    </section>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    function addMember() {
+      const name = document.getElementById('memberName').value;
+      const email = document.getElementById('memberEmail').value;
+      db.collection('members').add({ name, email })
+        .then(() => alert('Member Added'));
+    }
+    function createBill() {
+      const email = document.getElementById('billEmail').value;
+      const amount = document.getElementById('amount').value;
+      db.collection('bills').add({ email, amount, date: new Date().toISOString() })
+        .then(() => alert('Bill Created'));
+    }
+    function sendNotification() {
+      const email = document.getElementById('noteEmail').value;
+      const message = document.getElementById('message').value;
+      db.collection('notifications').add({ email, message, date: new Date().toISOString() })
+        .then(() => alert('Notification Sent'));
+    }
+    function logout() {
+      firebase.auth().signOut().then(() => window.location.href = 'login.html');
+    }
+  </script>
+</body>
+</html>

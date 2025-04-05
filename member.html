@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Member Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="dashboard">
+    <h1>Welcome Member</h1>
+    <section>
+      <h3>My Bills</h3>
+      <ul id="billsList"></ul>
+    </section>
+    <section>
+      <h3>Notifications</h3>
+      <ul id="notificationsList"></ul>
+    </section>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        const email = user.email;
+        db.collection('bills').where('email', '==', email).get()
+          .then(snapshot => {
+            snapshot.forEach(doc => {
+              const li = document.createElement('li');
+              li.textContent = `Amount: ₹${doc.data().amount} | Date: ${doc.data().date}`;
+              document.getElementById('billsList').appendChild(li);
+            });
+          });
+        db.collection('notifications').where('email', '==', email).get()
+          .then(snapshot => {
+            snapshot.forEach(doc => {
+              const li = document.createElement('li');
+              li.textContent = doc.data().message;
+              document.getElementById('notificationsList').appendChild(li);
+            });
+          });
+      }
+    });
+    function logout() {
+      firebase.auth().signOut().then(() => window.location.href = 'login.html');
+    }
+  </script>
+</body>
+</html>
